@@ -1,0 +1,689 @@
+:root {
+  --bg: #d9d9d9;
+  --card-red: #ff2b2b;
+  --card-green: #08c060;
+  --text: #000;
+  --dot-bg: #f4f4f4;
+  --dot-border: #000;
+  --dot-active: #000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow: hidden;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 8px;
+  padding: 8px;
+}
+
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.header p {
+  margin: 2px 0 0;
+  font-size: 14px;
+}
+
+.teams {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.team-card {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  padding: 14px 12px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.team-card-red {
+  background: var(--card-red);
+}
+
+.team-card-green {
+  background: var(--card-green);
+}
+
+.team-name-input {
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #000;
+}
+
+.team-name-input::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.team-card-body {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.score-block {
+  min-height: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 10px;
+}
+
+.score-block h3 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.dots {
+  display: grid;
+  justify-content: center;
+  gap: 6px;
+}
+
+.dots-hamarreko {
+  grid-template-columns: repeat(4, 28px);
+  grid-template-rows: repeat(2, 28px);
+}
+
+.dots-ttantto {
+  grid-template-columns: repeat(5, 28px);
+}
+
+.dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--dot-bg);
+  border: 1.5px solid var(--dot-border);
+}
+
+.dot.active {
+  background: var(--dot-active);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  padding-top: 10px;
+  border-top: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: transparent;
+  color: #000;
+  font-size: 48px;
+  line-height: 1;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.icon-btn:active {
+  transform: scale(0.96);
+}
+
+.winner-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.winner-overlay.hidden {
+  display: none;
+}
+
+.winner-card {
+  position: relative;
+  z-index: 2;
+  background: white;
+  color: #000;
+  border-radius: 20px;
+  padding: 24px 20px;
+  text-align: center;
+  min-width: 260px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.winner-card h2 {
+  margin: 0 0 16px;
+  font-size: 28px;
+}
+
+.close-winner-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  background: #08c060;
+  color: #000;
+}
+
+.confetti-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -20px;
+  width: 10px;
+  height: 16px;
+  background: #ffd54a;
+  animation: confettiFall linear forwards;
+}
+
+.confetti-piece:nth-child(4n) {
+  background: #ff2b2b;
+}
+
+.confetti-piece:nth-child(4n + 1) {
+  background: #08c060;
+}
+
+.confetti-piece:nth-child(4n + 2) {
+  background: #3b82f6;
+}
+
+.confetti-piece:nth-child(4n + 3) {
+  background: #ffffff;
+}
+
+@keyframes confettiFall {
+  from {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.95;
+  }
+}
+
+/* =========================
+   Mobile portrait
+   ========================= */
+@media (max-width: 430px) and (orientation: portrait) {
+  .app {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .header h1 {
+    font-size: 26px;
+  }
+
+  .header p {
+    font-size: 13px;
+  }
+
+  .teams {
+    gap: 10px;
+  }
+
+  .team-card {
+    padding: 12px 10px;
+    border-radius: 22px;
+    gap: 8px;
+  }
+
+  .team-name-input {
+    font-size: 26px;
+    max-width: 220px;
+  }
+
+  .team-card-body {
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  .score-block {
+    gap: 8px;
+  }
+
+  .score-block h3 {
+    font-size: 19px;
+  }
+
+  .dots {
+    gap: 6px;
+  }
+
+  .dots-hamarreko {
+    grid-template-columns: repeat(4, 28px);
+    grid-template-rows: repeat(2, 28px);
+  }
+
+  .dots-ttantto {
+    grid-template-columns: repeat(5, 28px);
+  }
+
+  .dot {
+    width: 28px;
+    height: 28px;
+    border-width: 1.5px;
+  }
+
+  .actions {
+    gap: 18px;
+    padding-top: 8px;
+  }
+
+  .icon-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 48px;
+  }
+}
+
+/* =========================
+   Petit mobile paysage
+   iPhone SE / petits téléphones
+   ========================= */
+@media (max-width: 568px) and (orientation: landscape) {
+  .app {
+    grid-template-rows: 1fr;
+    padding: 6px;
+    gap: 0;
+  }
+
+  .header {
+    display: none;
+  }
+
+  .teams {
+    height: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .team-card {
+    height: 100%;
+    padding: 10px 8px;
+    border-radius: 18px;
+    gap: 8px;
+  }
+
+  .team-name-input {
+    font-size: 22px;
+    max-width: 180px;
+  }
+
+  .team-card-body {
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  .score-block {
+    gap: 6px;
+  }
+
+  .score-block h3 {
+    font-size: 16px;
+  }
+
+  .dots {
+    gap: 4px;
+  }
+
+  .dots-hamarreko {
+    grid-template-columns: repeat(4, 24px);
+    grid-template-rows: repeat(2, 24px);
+  }
+
+  .dots-ttantto {
+    grid-template-columns: repeat(5, 24px);
+  }
+
+  .dot {
+    width: 24px;
+    height: 24px;
+    border-width: 1.5px;
+  }
+
+  .actions {
+    gap: 12px;
+    padding-top: 8px;
+  }
+
+  .icon-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 40px;
+  }
+
+  .winner-card {
+    min-width: 220px;
+    padding: 18px 16px;
+  }
+
+  .winner-card h2 {
+    font-size: 22px;
+  }
+
+  .close-winner-btn {
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+}
+
+/* =========================
+   Mobile paysage plus large
+   iPhone 11/12/13/14 etc.
+   ========================= */
+@media (min-width: 569px) and (max-width: 932px) and (orientation: landscape) {
+  .app {
+    grid-template-rows: 1fr;
+    padding: 10px;
+    gap: 0;
+  }
+
+  .header {
+    display: none;
+  }
+
+  .teams {
+    height: 100%;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .team-card {
+    height: 100%;
+    padding: 16px 14px;
+    border-radius: 24px;
+    gap: 12px;
+  }
+
+  .team-name-input {
+    font-size: 30px;
+    max-width: 240px;
+  }
+
+  .team-card-body {
+    gap: 12px;
+    padding-top: 10px;
+  }
+
+  .score-block {
+    gap: 10px;
+  }
+
+  .score-block h3 {
+    font-size: 22px;
+  }
+
+  .dots {
+    gap: 6px;
+  }
+
+  .dots-hamarreko {
+    grid-template-columns: repeat(4, 32px);
+    grid-template-rows: repeat(2, 32px);
+  }
+
+  .dots-ttantto {
+    grid-template-columns: repeat(5, 32px);
+  }
+
+  .dot {
+    width: 32px;
+    height: 32px;
+    border-width: 1.5px;
+  }
+
+  .actions {
+    gap: 18px;
+    padding-top: 10px;
+  }
+
+  .icon-btn {
+    width: 46px;
+    height: 46px;
+    font-size: 52px;
+  }
+
+  .winner-card {
+    min-width: 280px;
+    padding: 22px 18px;
+  }
+
+  .winner-card h2 {
+    font-size: 28px;
+  }
+
+  .close-winner-btn {
+    font-size: 16px;
+    padding: 12px 16px;
+  }
+}
+
+/* =========================
+   Tablette
+   ========================= */
+@media (min-width: 768px) and (orientation: portrait),
+  (min-width: 933px) and (max-width: 1199px) {
+  .app {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .header {
+    display: block;
+  }
+
+  .header h1 {
+    font-size: 40px;
+  }
+
+  .header p {
+    font-size: 18px;
+  }
+
+  .teams {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .team-card {
+    padding: 22px 18px;
+    border-radius: 28px;
+    gap: 14px;
+  }
+
+  .team-name-input {
+    max-width: 280px;
+    font-size: 34px;
+  }
+
+  .team-card-body {
+    gap: 14px;
+    padding-top: 12px;
+  }
+
+  .score-block {
+    gap: 12px;
+  }
+
+  .score-block h3 {
+    font-size: 24px;
+  }
+
+  .dots {
+    gap: 8px;
+  }
+
+  .dots-hamarreko {
+    grid-template-columns: repeat(4, 34px);
+    grid-template-rows: repeat(2, 34px);
+  }
+
+  .dots-ttantto {
+    grid-template-columns: repeat(5, 34px);
+  }
+
+  .dot {
+    width: 34px;
+    height: 34px;
+    border-width: 2px;
+  }
+
+  .actions {
+    gap: 22px;
+    padding-top: 12px;
+  }
+
+  .icon-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 58px;
+  }
+}
+
+/* =========================
+   Desktop
+   ========================= */
+@media (min-width: 1200px) {
+  .app {
+    padding: 24px 32px;
+    gap: 18px;
+  }
+
+  .header {
+    display: block;
+  }
+
+  .header h1 {
+    font-size: 52px;
+  }
+
+  .header p {
+    font-size: 22px;
+  }
+
+  .teams {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    grid-template-columns: repeat(2, minmax(520px, 1fr));
+    gap: 28px;
+    align-items: stretch;
+  }
+
+  .team-card {
+    min-height: 760px;
+    padding: 32px 28px;
+    border-radius: 34px;
+    gap: 20px;
+  }
+
+  .team-name-input {
+    max-width: 320px;
+    font-size: 38px;
+  }
+
+  .team-card-body {
+    gap: 22px;
+    padding-top: 14px;
+  }
+
+  .score-block {
+    gap: 14px;
+  }
+
+  .score-block h3 {
+    font-size: 28px;
+  }
+
+  .dots {
+    gap: 10px;
+  }
+
+  .dots-hamarreko {
+    grid-template-columns: repeat(4, 44px);
+    grid-template-rows: repeat(2, 44px);
+  }
+
+  .dots-ttantto {
+    grid-template-columns: repeat(5, 44px);
+  }
+
+  .dot {
+    width: 44px;
+    height: 44px;
+    border-width: 2px;
+  }
+
+  .actions {
+    gap: 28px;
+    padding-top: 14px;
+  }
+
+  .icon-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 72px;
+  }
+}
