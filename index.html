@@ -2,81 +2,79 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MUS</title>
-  <script type="module" src="/src/main.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MUS</title>
+    <script type="module" src="/src/main.js"></script>
 </head>
 
 <body>
-  <main class="app">
-    <header class="header">
-      <h1>MUS</h1>
-      <p>Compteur de points</p>
-    </header>
+    <main class="app">
+        <header class="header">
+            <h1>MUS</h1>
+            <p>Compteur de points</p>
+        </header>
 
-    <section class="teams">
-      <article class="team-card team-card-red">
-        <input
-          class="team-name-input"
-          id="teamName1"
-          type="text"
-          value="Équipe 1"
-          maxlength="20"
-          aria-label="Nom équipe 1"
-        />
-
-        <div class="team-card-body">
-          <section class="score-block">
-            <h3>Hamarreko</h3>
-            <div class="dots dots-hamarreko" id="hamarrekoDotsTeam1"></div>
-
-            <h3>Ttantto</h3>
-            <div class="dots dots-ttantto" id="ttanttoDotsTeam1"></div>
-          </section>
-
-          <div class="actions">
-            <button class="icon-btn" data-action="minus" data-team="team1" aria-label="Retirer un ttantto équipe 1">−</button>
-            <button class="icon-btn" data-action="plus" data-team="team1" aria-label="Ajouter un ttantto équipe 1">+</button>
-          </div>
+        <div class="global-actions">
+            <button id="resetAll" class="reset-global-btn">
+                Nouvelle manche
+            </button>
         </div>
-      </article>
 
-      <article class="team-card team-card-green">
-        <input
-          class="team-name-input"
-          id="teamName2"
-          type="text"
-          value="Équipe 2"
-          maxlength="20"
-          aria-label="Nom équipe 2"
-        />
+        <section class="teams">
+            <article class="team-card team-card-red">
+                <input class="team-name-input" id="teamName1" type="text" value="Équipe 1" maxlength="20"
+                    aria-label="Nom équipe 1" />
 
-        <div class="team-card-body">
-          <section class="score-block">
-            <h3>Hamarreko</h3>
-            <div class="dots dots-hamarreko" id="hamarrekoDotsTeam2"></div>
+                <div class="team-card-body">
+                    <section class="score-block">
+                        <h3>Hamarreko</h3>
+                        <div class="dots dots-hamarreko" id="hamarrekoDotsTeam1"></div>
 
-            <h3>Ttantto</h3>
-            <div class="dots dots-ttantto" id="ttanttoDotsTeam2"></div>
-          </section>
+                        <h3>Ttantto</h3>
+                        <div class="dots dots-ttantto" id="ttanttoDotsTeam1"></div>
+                    </section>
 
-          <div class="actions">
-            <button class="icon-btn" data-action="minus" data-team="team2" aria-label="Retirer un ttantto équipe 2">−</button>
-            <button class="icon-btn" data-action="plus" data-team="team2" aria-label="Ajouter un ttantto équipe 2">+</button>
-          </div>
+                    <div class="actions">
+                        <button class="icon-btn" data-action="minus" data-team="team1"
+                            aria-label="Retirer un ttantto équipe 1">−</button>
+                        <button class="icon-btn" data-action="plus" data-team="team1"
+                            aria-label="Ajouter un ttantto équipe 1">+</button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="team-card team-card-green">
+                <input class="team-name-input" id="teamName2" type="text" value="Équipe 2" maxlength="20"
+                    aria-label="Nom équipe 2" />
+
+                <div class="team-card-body">
+                    <section class="score-block">
+                        <h3>Hamarreko</h3>
+                        <div class="dots dots-hamarreko" id="hamarrekoDotsTeam2"></div>
+
+                        <h3>Ttantto</h3>
+                        <div class="dots dots-ttantto" id="ttanttoDotsTeam2"></div>
+                    </section>
+
+                    <div class="actions">
+                        <button class="icon-btn" data-action="minus" data-team="team2"
+                            aria-label="Retirer un ttantto équipe 2">−</button>
+                        <button class="icon-btn" data-action="plus" data-team="team2"
+                            aria-label="Ajouter un ttantto équipe 2">+</button>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <div id="winnerOverlay" class="winner-overlay hidden" aria-live="polite">
+        <div class="winner-card">
+            <h2 id="winnerMessage">Bravo !</h2>
+            <button id="closeWinner" class="close-winner-btn">Continuer</button>
         </div>
-      </article>
-    </section>
-  </main>
-
-  <div id="winnerOverlay" class="winner-overlay hidden" aria-live="polite">
-    <div class="winner-card">
-      <h2 id="winnerMessage">Bravo !</h2>
-      <button id="closeWinner" class="close-winner-btn">Continuer</button>
+        <div id="confettiContainer" class="confetti-container"></div>
     </div>
-    <div id="confettiContainer" class="confetti-container"></div>
-  </div>
 </body>
 
 </html>

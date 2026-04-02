@@ -1,34 +1,34 @@
-import './style.css';
+import "./style.css";
 
 const TTANTTO_PER_HAMARREKO = 5;
 const MAX_HAMARREKO = 8;
 
 const state = {
   team1: { hamarreko: 0, ttantto: 0, hasWon: false },
-  team2: { hamarreko: 0, ttantto: 0, hasWon: false }
+  team2: { hamarreko: 0, ttantto: 0, hasWon: false },
 };
 
 function getTeamName(team) {
-  const inputId = team === 'team1' ? 'teamName1' : 'teamName2';
+  const inputId = team === "team1" ? "teamName1" : "teamName2";
   const input = document.getElementById(inputId);
-  const value = input ? input.value.trim() : '';
+  const value = input ? input.value.trim() : "";
 
   if (value) return value;
-  return team === 'team1' ? 'Équipe 1' : 'Équipe 2';
+  return team === "team1" ? "Équipe 1" : "Équipe 2";
 }
 
 function createDots(containerId, totalDots, activeDots) {
   const container = document.getElementById(containerId);
   if (!container) return;
 
-  container.innerHTML = '';
+  container.innerHTML = "";
 
   for (let i = 0; i < totalDots; i += 1) {
-    const dot = document.createElement('div');
-    dot.className = 'dot';
+    const dot = document.createElement("div");
+    dot.className = "dot";
 
     if (i < activeDots) {
-      dot.classList.add('active');
+      dot.classList.add("active");
     }
 
     container.appendChild(dot);
@@ -66,22 +66,22 @@ function normalizeTeam(team) {
 }
 
 function render() {
-  createDots('hamarrekoDotsTeam1', MAX_HAMARREKO, state.team1.hamarreko);
-  createDots('ttanttoDotsTeam1', TTANTTO_PER_HAMARREKO, state.team1.ttantto);
+  createDots("hamarrekoDotsTeam1", MAX_HAMARREKO, state.team1.hamarreko);
+  createDots("ttanttoDotsTeam1", TTANTTO_PER_HAMARREKO, state.team1.ttantto);
 
-  createDots('hamarrekoDotsTeam2', MAX_HAMARREKO, state.team2.hamarreko);
-  createDots('ttanttoDotsTeam2', TTANTTO_PER_HAMARREKO, state.team2.ttantto);
+  createDots("hamarrekoDotsTeam2", MAX_HAMARREKO, state.team2.hamarreko);
+  createDots("ttanttoDotsTeam2", TTANTTO_PER_HAMARREKO, state.team2.ttantto);
 }
 
 function launchConfetti() {
-  const container = document.getElementById('confettiContainer');
+  const container = document.getElementById("confettiContainer");
   if (!container) return;
 
-  container.innerHTML = '';
+  container.innerHTML = "";
 
   for (let i = 0; i < 60; i += 1) {
-    const piece = document.createElement('span');
-    piece.className = 'confetti-piece';
+    const piece = document.createElement("span");
+    piece.className = "confetti-piece";
     piece.style.left = `${Math.random() * 100}%`;
     piece.style.animationDelay = `${Math.random() * 0.4}s`;
     piece.style.animationDuration = `${1.8 + Math.random() * 1.2}s`;
@@ -90,24 +90,24 @@ function launchConfetti() {
 }
 
 function showWinner(team) {
-  const overlay = document.getElementById('winnerOverlay');
-  const message = document.getElementById('winnerMessage');
+  const overlay = document.getElementById("winnerOverlay");
+  const message = document.getElementById("winnerMessage");
 
   if (!overlay || !message) return;
 
   message.textContent = `Bravo ${getTeamName(team)} !`;
-  overlay.classList.remove('hidden');
+  overlay.classList.remove("hidden");
   launchConfetti();
 }
 
 function hideWinner() {
-  const overlay = document.getElementById('winnerOverlay');
-  const container = document.getElementById('confettiContainer');
+  const overlay = document.getElementById("winnerOverlay");
+  const container = document.getElementById("confettiContainer");
 
   if (!overlay || !container) return;
 
-  overlay.classList.add('hidden');
-  container.innerHTML = '';
+  overlay.classList.add("hidden");
+  container.innerHTML = "";
 }
 
 function checkWinner(team) {
@@ -141,20 +141,43 @@ function removeTtantto(team) {
   render();
 }
 
-document.addEventListener('click', (event) => {
-  const button = event.target.closest('[data-action]');
+document.addEventListener("click", (event) => {
+  const button = event.target.closest("[data-action]");
   if (!button) return;
 
   const { action, team } = button.dataset;
   if (!team) return;
 
-  if (action === 'plus') addTtantto(team);
-  if (action === 'minus') removeTtantto(team);
+  if (action === "plus") addTtantto(team);
+  if (action === "minus") removeTtantto(team);
 });
 
-const closeButton = document.getElementById('closeWinner');
+function resetGame() {
+  state.team1.hamarreko = 0;
+  state.team1.ttantto = 0;
+  state.team1.hasWon = false;
+
+  state.team2.hamarreko = 0;
+  state.team2.ttantto = 0;
+  state.team2.hasWon = false;
+
+  hideWinner();
+  render();
+}
+
+const closeButton = document.getElementById("closeWinner");
 if (closeButton) {
-  closeButton.addEventListener('click', hideWinner);
+  closeButton.addEventListener("click", hideWinner);
+}
+
+const resetButton = document.getElementById("resetAll");
+if (resetButton) {
+  resetButton.addEventListener("click", () => {
+    const ok = window.confirm("Nouvelle manche ?");
+    if (ok) {
+      resetGame();
+    }
+  });
 }
 
 render();
