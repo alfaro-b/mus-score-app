@@ -1,3 +1,5 @@
+🚧 Projet en cours de développement
+
 # MUS Score App
 
 Application web simple pour compter les points au jeu de cartes basque **Mus**.
