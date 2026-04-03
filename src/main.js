@@ -61,6 +61,15 @@ function switchLanguage(languageCode) {
   currentLang = languageCode;
   localStorage.setItem(STORAGE_LANG_KEY, currentLang);
   applyTranslations();
+  updateLangUI();
+}
+
+function updateLangUI() {
+  const btnEu = document.getElementById("langEu");
+  const btnFr = document.getElementById("langFr");
+
+  btnEu?.classList.toggle("active", currentLang === "eu");
+  btnFr?.classList.toggle("active", currentLang === "fr");
 }
 
 document.getElementById("langEu")?.addEventListener("click", () => {
@@ -323,4 +332,5 @@ if (team2NameInput) {
 
 loadGame();
 applyTranslations();
+updateLangUI();
 render();
