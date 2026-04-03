@@ -1,11 +1,33 @@
 :root {
-  --bg: #d9d9d9;
-  --card-red: #ff2b2b;
-  --card-green: #08c060;
-  --text: #000;
-  --dot-bg: #f4f4f4;
-  --dot-border: #000;
-  --dot-active: #000;
+  --red: #e63946;
+  --green: #2a9d8f;
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #111111;
+  --muted: #6b7280;
+  --dot-off: #ececec;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+
+  --app-padding: clamp(10px, 2.2vw, 24px);
+  --app-gap: clamp(8px, 1.8vw, 18px);
+  --card-padding: clamp(10px, 2vw, 24px);
+  --card-gap: clamp(8px, 1.5vw, 18px);
+  --radius: clamp(16px, 2vw, 26px);
+
+  --h1-size: clamp(1.5rem, 3vw, 2.4rem);
+  --subtitle-size: clamp(0.78rem, 1.5vw, 1rem);
+
+  --team-name-size: clamp(1.3rem, 3vw, 2.2rem);
+  --label-size: clamp(1rem, 1.9vw, 1.35rem);
+
+  --dot-size: clamp(22px, 2.6vw, 34px);
+  --dot-gap: clamp(6px, 1vw, 10px);
+
+  --btn-size: clamp(44px, 5vw, 58px);
+  --btn-font: clamp(1.35rem, 2vw, 1.9rem);
+
+  --switch-height: clamp(28px, 4vw, 38px);
+  --switch-minw: clamp(34px, 4.5vw, 46px);
 }
 
 * {
@@ -21,8 +43,16 @@ body {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
-  overflow: hidden;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  overflow-x: hidden;
 }
 
 button,
@@ -30,690 +60,205 @@ input {
   font: inherit;
 }
 
+/* APP */
 .app {
+  width: min(100%, 1100px);
   min-height: 100dvh;
+  margin: 0 auto;
+  padding: var(--app-padding);
   display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 8px;
-  padding: 8px;
+  grid-template-rows: auto auto 1fr;
+  gap: var(--app-gap);
 }
 
+/* HEADER */
 .header {
-  text-align: center;
+  display: grid;
+  gap: clamp(4px, 1vw, 8px);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header h1 {
   margin: 0;
-  font-size: 28px;
-  line-height: 1;
-  font-weight: 800;
+  font-size: var(--h1-size);
+  font-weight: 900;
 }
 
 .header p {
-  margin: 2px 0 0;
-  font-size: 14px;
+  margin: 0;
+  font-size: var(--subtitle-size);
+  color: var(--muted);
 }
 
-.global-actions {
+.lang-switcher {
   display: flex;
-  justify-content: center;
-  margin-bottom: 8px;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 999px;
+  background: #fff;
 }
 
+.lang-switcher button {
+  border: none;
+  background: transparent;
+  min-width: var(--switch-minw);
+  height: var(--switch-height);
+  font-weight: 800;
+}
+
+/* RESET */
+.reset-btn, 
 .reset-global-btn {
+  width: 100%;
   border: none;
   border-radius: 14px;
-  padding: 10px 18px;
-  font-size: 16px;
+  padding: clamp(8px, 1.4vw, 14px);
+  background: #111;
+  color: white;
   font-weight: 800;
-  cursor: pointer;
-  background: #000;
-  color: #fff;
 }
 
-.reset-global-btn:active {
-  transform: scale(0.97);
-}
-
+/* TEAMS */
 .teams {
-  min-height: 0;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: var(--app-gap);
 }
 
+/* CARD */
 .team-card {
-  min-height: 0;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: var(--card-padding);
+  box-shadow: var(--shadow);
   display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 10px;
-  padding: 14px 12px;
-  border-radius: 24px;
-  overflow: hidden;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--card-gap);
+  position: relative;
 }
 
-.team-card-red {
-  background: var(--card-red);
+.team-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: clamp(4px, 0.7vw, 7px);
 }
 
-.team-card-green {
-  background: var(--card-green);
+.team-card-red::before {
+  background: var(--red);
 }
 
+.team-card-green::before {
+  background: var(--green);
+}
+
+/* TEAM NAME */
 .team-name-input {
-  width: 100%;
-  max-width: 260px;
-  margin: 0 auto;
-  display: block;
-  text-align: center;
-  font-size: 28px;
-  font-weight: 800;
-  background: transparent;
   border: none;
-  outline: none;
-  color: #000;
+  text-align: center;
+  font-size: var(--team-name-size);
+  font-weight: 900;
 }
 
-.team-name-input::placeholder {
-  color: rgba(0, 0, 0, 0.6);
-}
-
-.team-card-body {
-  min-height: 0;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 10px;
-  padding-top: 10px;
-  border-top: 2px solid rgba(0, 0, 0, 0.2);
-}
-
+/* SCORE */
 .score-block {
-  min-height: 0;
   display: grid;
-  align-content: center;
   justify-items: center;
-  gap: 10px;
+  align-content: center;
+  gap: clamp(5px, 1vw, 10px);
 }
 
 .score-block h3 {
   margin: 0;
-  font-size: 20px;
-  line-height: 1.1;
-  font-weight: 700;
+  font-size: var(--label-size);
 }
 
+/* DOTS */
 .dots {
   display: grid;
+  gap: var(--dot-gap);
   justify-content: center;
-  gap: 6px;
 }
 
-.dots-hamarreko {
-  grid-template-columns: repeat(4, 28px);
-  grid-template-rows: repeat(2, 28px);
+.dots-hamarreko,
+#hamarrekoDotsTeam1,
+#hamarrekoDotsTeam2 {
+  grid-template-columns: repeat(4, var(--dot-size));
+  grid-template-rows: repeat(2, var(--dot-size));
 }
 
-.dots-ttantto {
-  grid-template-columns: repeat(5, 28px);
+.dots-ttantto,
+#ttanttoDotsTeam1,
+#ttanttoDotsTeam2 {
+  grid-template-columns: repeat(5, var(--dot-size));
 }
 
 .dot {
-  width: 28px;
-  height: 28px;
+  width: var(--dot-size);
+  height: var(--dot-size);
   border-radius: 50%;
-  background: var(--dot-bg);
-  border: 1.5px solid var(--dot-border);
+  background: var(--dot-off);
 }
 
-.dot.active {
-  background: var(--dot-active);
+.team-card-red .dot.active {
+  background: var(--red);
 }
 
+.team-card-green .dot.active {
+  background: var(--green);
+}
+
+/* ACTIONS */
 .actions {
   display: flex;
   justify-content: center;
-  gap: 18px;
-  padding-top: 10px;
-  border-top: 2px solid rgba(0, 0, 0, 0.2);
+  align-items: center;
+  gap: clamp(10px, 1.4vw, 16px);
 }
 
 .icon-btn {
-  width: 42px;
-  height: 42px;
+  width: var(--btn-size);
+  height: var(--btn-size);
+  border-radius: 50%;
   border: none;
-  background: transparent;
-  color: #000;
-  font-size: 48px;
-  line-height: 1;
-  font-weight: 800;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  cursor: pointer;
-  touch-action: manipulation;
+  background: #eee;
+  font-size: var(--btn-font);
 }
 
-.icon-btn:active {
-  transform: scale(0.96);
-}
-
-.winner-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.28);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.winner-overlay.hidden {
-  display: none;
-}
-
-.winner-card {
-  position: relative;
-  z-index: 2;
-  background: white;
-  color: #000;
-  border-radius: 20px;
-  padding: 24px 20px;
-  text-align: center;
-  min-width: 260px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-}
-
-.winner-card h2 {
-  margin: 0 0 16px;
-  font-size: 28px;
-}
-
-.close-winner-btn {
-  border: none;
-  border-radius: 12px;
-  padding: 12px 18px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  background: #08c060;
-  color: #000;
-}
-
-.confetti-container {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.confetti-piece {
-  position: absolute;
-  top: -20px;
-  width: 10px;
-  height: 16px;
-  background: #ffd54a;
-  animation: confettiFall linear forwards;
-}
-
-.confetti-piece:nth-child(4n) {
-  background: #ff2b2b;
-}
-
-.confetti-piece:nth-child(4n + 1) {
-  background: #08c060;
-}
-
-.confetti-piece:nth-child(4n + 2) {
-  background: #3b82f6;
-}
-
-.confetti-piece:nth-child(4n + 3) {
-  background: #ffffff;
-}
-
-@keyframes confettiFall {
-  from {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
+/* LANDSCAPE */
+@media (orientation: landscape) and (min-width: 560px) {
+  body {
+    overflow: hidden;
   }
 
-  to {
-    transform: translateY(110vh) rotate(720deg);
-    opacity: 0.95;
-  }
-}
-
-/* =========================
-   Mobile portrait
-   ========================= */
-@media (max-width: 430px) and (orientation: portrait) {
   .app {
-    padding: 8px;
-    gap: 8px;
-  }
-
-  .header h1 {
-    font-size: 26px;
-  }
-
-  .header p {
-    font-size: 13px;
-  }
-
-  .teams {
-    gap: 10px;
-  }
-
-  .team-card {
-    padding: 12px 10px;
-    border-radius: 22px;
-    gap: 8px;
-  }
-
-  .team-name-input {
-    font-size: 26px;
-    max-width: 220px;
-  }
-
-  .team-card-body {
-    gap: 8px;
-    padding-top: 8px;
-  }
-
-  .score-block {
-    gap: 8px;
-  }
-
-  .score-block h3 {
-    font-size: 19px;
-  }
-
-  .dots {
-    gap: 6px;
-  }
-
-  .dots-hamarreko {
-    grid-template-columns: repeat(4, 28px);
-    grid-template-rows: repeat(2, 28px);
-  }
-
-  .dots-ttantto {
-    grid-template-columns: repeat(5, 28px);
-  }
-
-  .dot {
-    width: 28px;
-    height: 28px;
-    border-width: 1.5px;
-  }
-
-  .actions {
-    gap: 18px;
-    padding-top: 8px;
-  }
-
-  .icon-btn {
-    width: 42px;
-    height: 42px;
-    font-size: 48px;
-  }
-}
-
-/* =========================
-   Petit mobile paysage
-   iPhone SE / petits téléphones
-   ========================= */
-@media (max-width: 568px) and (orientation: landscape) {
-  .app {
-    grid-template-rows: 1fr;
-    padding: 6px;
-    gap: 0;
-  }
-
-  .header {
-    display: none;
-  }
-
-  .teams {
-    height: 100%;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .team-card {
-    height: 100%;
-    padding: 10px 8px;
-    border-radius: 18px;
-    gap: 8px;
-  }
-
-  .team-name-input {
-    font-size: 22px;
-    max-width: 180px;
-  }
-
-  .team-card-body {
-    gap: 8px;
-    padding-top: 8px;
-  }
-
-  .score-block {
-    gap: 6px;
-  }
-
-  .score-block h3 {
-    font-size: 16px;
-  }
-
-  .dots {
-    gap: 4px;
-  }
-
-  .dots-hamarreko {
-    grid-template-columns: repeat(4, 24px);
-    grid-template-rows: repeat(2, 24px);
-  }
-
-  .dots-ttantto {
-    grid-template-columns: repeat(5, 24px);
-  }
-
-  .dot {
-    width: 24px;
-    height: 24px;
-    border-width: 1.5px;
-  }
-
-  .actions {
-    gap: 12px;
-    padding-top: 8px;
-  }
-
-  .icon-btn {
-    width: 34px;
-    height: 34px;
-    font-size: 40px;
-  }
-
-  .winner-card {
-    min-width: 220px;
-    padding: 18px 16px;
-  }
-
-  .winner-card h2 {
-    font-size: 22px;
-  }
-
-  .close-winner-btn {
-    font-size: 14px;
-    padding: 10px 14px;
-  }
-}
-
-/* =========================
-   Mobile paysage plus large
-   iPhone 11/12/13/14 etc.
-   ========================= */
-@media (min-width: 569px) and (max-width: 932px) and (orientation: landscape) {
-  .app {
-    grid-template-rows: 1fr;
-    padding: 10px;
-    gap: 0;
-  }
-
-  .header {
-    display: none;
-  }
-
-  .global-actions {
-    margin-bottom: 4px;
-  }
-
-  .reset-global-btn {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-
-  .teams {
-    height: 100%;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .team-card {
-    height: 100%;
-    padding: 16px 14px;
-    border-radius: 24px;
-    gap: 12px;
-  }
-
-  .team-name-input {
-    font-size: 30px;
-    max-width: 240px;
-  }
-
-  .team-card-body {
-    gap: 12px;
-    padding-top: 10px;
-  }
-
-  .score-block {
-    gap: 10px;
-  }
-
-  .score-block h3 {
-    font-size: 22px;
-  }
-
-  .dots {
-    gap: 6px;
-  }
-
-  .dots-hamarreko {
-    grid-template-columns: repeat(4, 32px);
-    grid-template-rows: repeat(2, 32px);
-  }
-
-  .dots-ttantto {
-    grid-template-columns: repeat(5, 32px);
-  }
-
-  .dot {
-    width: 32px;
-    height: 32px;
-    border-width: 1.5px;
-  }
-
-  .actions {
-    gap: 18px;
-    padding-top: 10px;
-  }
-
-  .icon-btn {
-    width: 46px;
-    height: 46px;
-    font-size: 52px;
-  }
-
-  .winner-card {
-    min-width: 280px;
-    padding: 22px 18px;
-  }
-
-  .winner-card h2 {
-    font-size: 28px;
-  }
-
-  .close-winner-btn {
-    font-size: 16px;
-    padding: 12px 16px;
-  }
-}
-
-/* =========================
-   Tablette
-   ========================= */
-@media (min-width: 768px) and (orientation: portrait),
-  (min-width: 933px) and (max-width: 1199px) {
-  .app {
-    padding: 16px;
-    gap: 12px;
-  }
-
-  .header {
-    display: block;
-  }
-
-  .header h1 {
-    font-size: 40px;
-  }
-
-  .header p {
-    font-size: 18px;
+    height: 100dvh;
   }
 
   .teams {
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
+    height: 100%;
   }
 
   .team-card {
-    padding: 22px 18px;
-    border-radius: 28px;
-    gap: 14px;
+    height: 100%;
   }
 
-  .team-name-input {
-    max-width: 280px;
-    font-size: 34px;
-  }
-
-  .team-card-body {
-    gap: 14px;
-    padding-top: 12px;
-  }
-
-  .score-block {
-    gap: 12px;
-  }
-
-  .score-block h3 {
-    font-size: 24px;
-  }
-
-  .dots {
-    gap: 8px;
-  }
-
-  .dots-hamarreko {
-    grid-template-columns: repeat(4, 34px);
-    grid-template-rows: repeat(2, 34px);
-  }
-
-  .dots-ttantto {
-    grid-template-columns: repeat(5, 34px);
-  }
-
-  .dot {
-    width: 34px;
-    height: 34px;
-    border-width: 2px;
+  /* fix boutons */
+  .icon-btn {
+    width: clamp(40px, 4.2vw, 50px);
+    height: clamp(40px, 4.2vw, 50px);
+    font-size: clamp(1.2rem, 1.6vw, 1.6rem);
   }
 
   .actions {
-    gap: 22px;
-    padding-top: 12px;
-  }
-
-  .icon-btn {
-    width: 52px;
-    height: 52px;
-    font-size: 58px;
-  }
-}
-
-/* =========================
-   Desktop
-   ========================= */
-@media (min-width: 1200px) {
-  .app {
-    padding: 24px 32px;
-    gap: 18px;
-  }
-
-  .header {
-    display: block;
-  }
-
-  .header h1 {
-    font-size: 52px;
-  }
-
-  .header p {
-    font-size: 22px;
-  }
-
-  .teams {
-    width: 100%;
-    max-width: 1600px;
-    margin: 0 auto;
-    grid-template-columns: repeat(2, minmax(520px, 1fr));
-    gap: 28px;
-    align-items: stretch;
-  }
-
-  .team-card {
-    min-height: 760px;
-    padding: 32px 28px;
-    border-radius: 34px;
-    gap: 20px;
-  }
-
-  .team-name-input {
-    max-width: 320px;
-    font-size: 38px;
-  }
-
-  .team-card-body {
-    gap: 22px;
-    padding-top: 14px;
-  }
-
-  .score-block {
-    gap: 14px;
-  }
-
-  .score-block h3 {
-    font-size: 28px;
-  }
-
-  .dots {
     gap: 10px;
-  }
-
-  .dots-hamarreko {
-    grid-template-columns: repeat(4, 44px);
-    grid-template-rows: repeat(2, 44px);
-  }
-
-  .dots-ttantto {
-    grid-template-columns: repeat(5, 44px);
-  }
-
-  .dot {
-    width: 44px;
-    height: 44px;
-    border-width: 2px;
-  }
-
-  .actions {
-    gap: 28px;
-    padding-top: 14px;
-  }
-
-  .icon-btn {
-    width: 64px;
-    height: 64px;
-    font-size: 72px;
   }
 }
