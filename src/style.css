@@ -58,6 +58,7 @@ body {
 button,
 input {
   font: inherit;
+  touch-action: manipulation;
 }
 
 /* APP */
@@ -121,11 +122,11 @@ input {
 .lang-switcher button.active {
   background: #ffffff;
   color: var(--text);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* RESET */
-.reset-btn, 
+.reset-btn,
 .reset-global-btn {
   width: 100%;
   border: none;
@@ -184,12 +185,22 @@ input {
   background: var(--green);
 }
 
+.team-header {
+  display: flex;
+  justify-content: center;
+}
+
 /* TEAM NAME */
 .team-name-input {
-  border: none;
+  width: 100%;
   text-align: center;
   font-size: var(--team-name-size);
   font-weight: 900;
+  display: block;
+  margin: 0 auto;
+  /* IMPORTANT iOS */
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 /* SCORE */
@@ -255,6 +266,8 @@ input {
   border: none;
   background: #eee;
   font-size: var(--btn-font);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* WINNER */
