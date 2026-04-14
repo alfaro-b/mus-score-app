@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  base: "/mus-score-app/",
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
@@ -13,7 +14,7 @@ export default defineConfig({
         theme_color: "#f6f7f9",
         background_color: "#f6f7f9",
         display: "standalone",
-        start_url: "/",
+        start_url: "/mus-score-app/",
         lang: "fr",
         icons: [
           {
