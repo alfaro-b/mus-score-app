@@ -6,9 +6,10 @@ Application web pour compter facilement les points au jeu de cartes basque **Mus
 
 ## 📱 Aperçu
 
-| Icône | Application |
-|------|------------|
-| ![Icône MUS](./assets/icon.png) | ![Screenshot MUS](./assets/screenshot.png) |
+<p align="center">
+  <img src="./assets/icon.png" width="180">
+  <img src="./assets/screenshot.png" width="200">
+</p>
 
 ---
 
@@ -66,11 +67,13 @@ npm run dev
 ## 📦 Build
 
 Générer la version de production :
+
 ```bash
 npm run build
 ```
 
 Prévisualiser le build localement :
+
 ```bash
 npm run preview
 ```
@@ -82,6 +85,7 @@ npm run preview
 Le projet est déployé automatiquement via **GitHub Pages**.
 
 À chaque push sur la branche main :
+
 1. GitHub Actions installe les dépendances
 2. Lance le build (npm run build)
 3. Publie le contenu du dossier dist
