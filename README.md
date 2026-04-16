@@ -4,6 +4,12 @@ Application web pour compter facilement les points au jeu de cartes basque **Mus
 
 👉 Pensée pour être utilisée **n’importe où**, même sans matériel pour compter les points.
 
+## 📱 Aperçu
+
+| Icône | Application |
+|------|------------|
+| ![Icône MUS](./assets/icon.png) | ![Screenshot MUS](./assets/screenshot.png) |
+
 ---
 
 ## 🚀 Démo
